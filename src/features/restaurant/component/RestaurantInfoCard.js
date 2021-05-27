@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { Card } from "react-native-paper";
 import styled from "styled-components/native";
 
@@ -18,26 +17,33 @@ const RestaurantInfo = ({ restaurant = {} }) => {
 
   return (
     <CardContainer elevation={5}>
-      <Card.Cover key={name} style={styles.cover} source={{ uri: photos[0] }} />
-      <Title style={styles.title}>{name}</Title>
+      <CardCover key={name} source={{ uri: photos[0] }} />
+      <Info>
+        <Title>{name}</Title>
+        <Address>{address}</Address>
+      </Info>
     </CardContainer>
   );
 };
 export default RestaurantInfo;
-const Title = styled.Text`
-  color: blue;
-  font-size: 25px;
-`;
-const CardContainer = styled(Card)`
-  margin: 10px;
-  background-color: white;
-`;
 
-const styles = StyleSheet.create({
-  cover: {
-    padding: 10,
-  },
-  title: {
-    padding: 10,
-  },
-});
+const CardContainer = styled(Card)`
+  margin: ${(props) => props.theme.space[2]};
+  background-color: ${(props) => props.theme.colors.ui.quaternary};
+`;
+const CardCover = styled(Card.Cover)`
+  background-color: ${(props) => props.theme.colors.ui.quaternary};
+  padding: ${(props) => props.theme.space[3]};
+`;
+const Info = styled.View`
+  padding: ${(props) => props.theme.space[2]};
+`;
+const Title = styled.Text`
+  color: ${(props) => props.theme.colors.ui.success};
+  font-size: ${(props) => props.theme.fontSizes.h5};
+  font-family: ${(props) => props.theme.fonts.heading};
+`;
+const Address = styled.Text`
+  font-family: ${(p) => p.theme.fonts.body};
+  font-size: ${(p) => p.theme.fontSizes.body};
+`;

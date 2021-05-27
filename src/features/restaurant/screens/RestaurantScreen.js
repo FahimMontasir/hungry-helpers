@@ -1,35 +1,33 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, StatusBar, View } from "react-native";
+import { StatusBar } from "react-native";
 import { Searchbar } from "react-native-paper";
+import styled from "styled-components/native";
 import RestaurantInfo from "../component/RestaurantInfoCard";
 
 const RestaurantScreen = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.searchContainer}>
+    <RestaurantContainer>
+      <SearchContainer>
         <Searchbar placeholder="search now" />
-      </View>
-      <View style={styles.contentContainer}>
+      </SearchContainer>
+      <RestaurantListContainer>
         <RestaurantInfo />
-      </View>
-    </SafeAreaView>
+      </RestaurantListContainer>
+    </RestaurantContainer>
   );
 };
 export default RestaurantScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight,
-  },
-  searchContainer: {
-    backgroundColor: "white",
-    width: "100%",
-    padding: 15,
-  },
-  contentContainer: {
-    backgroundColor: "tomato",
-    width: "100%",
-    flex: 1,
-  },
-});
+const RestaurantContainer = styled.SafeAreaView`
+  flex: 1;
+  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
+`;
+const SearchContainer = styled.View`
+  background-color: ${(props) => props.theme.colors.bg.primary};
+  width: 100%;
+  padding: ${(props) => props.theme.space[3]};
+`;
+const RestaurantListContainer = styled.View`
+  flex: 1;
+  background-color: ${(props) => props.theme.colors.bg.primary};
+  width: 100%;
+`;

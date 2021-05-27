@@ -1,7 +1,7 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, StatusBar, View } from "react-native";
 import { Searchbar } from "react-native-paper";
-import RestaurantInfo from "../component/RestaurantInfo";
+import RestaurantInfo from "../component/RestaurantInfoCard";
 
 const RestaurantScreen = () => {
   return (
@@ -21,11 +21,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight,
-    backgroundColor: "#fff",
-    alignItems: "center",
   },
   searchContainer: {
-    backgroundColor: "blue",
+    backgroundColor: "white",
     width: "100%",
     padding: 15,
   },

@@ -1,8 +1,12 @@
 import React from "react";
-import { StatusBar } from "react-native";
+import { FlatList } from "react-native";
 import { Searchbar } from "react-native-paper";
-import styled from "styled-components/native";
 import RestaurantInfo from "../component/RestaurantInfoCard";
+import {
+  RestaurantContainer,
+  RestaurantListContainer,
+  SearchContainer,
+} from "./RestaurantScreen.style";
 
 const RestaurantScreen = () => {
   return (
@@ -11,23 +15,13 @@ const RestaurantScreen = () => {
         <Searchbar placeholder="search now" />
       </SearchContainer>
       <RestaurantListContainer>
-        <RestaurantInfo />
+        <FlatList
+          data={[{ name: 1 }, { name: 2 }, { name: 3 }]}
+          renderItem={({ item }) => <RestaurantInfo />}
+          keyExtractor={(item) => item.name.toString()}
+        />
       </RestaurantListContainer>
     </RestaurantContainer>
   );
 };
 export default RestaurantScreen;
-const RestaurantContainer = styled.SafeAreaView`
-  flex: 1;
-  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
-`;
-const SearchContainer = styled.View`
-  background-color: ${(props) => props.theme.colors.bg.primary};
-  width: 100%;
-  padding: ${(props) => props.theme.space[3]};
-`;
-const RestaurantListContainer = styled.View`
-  flex: 1;
-  background-color: ${(props) => props.theme.colors.bg.primary};
-  width: 100%;
-`;

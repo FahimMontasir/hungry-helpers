@@ -1,24 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FlatList } from "react-native";
-import { Searchbar } from "react-native-paper";
+import { RestaurantsContext } from "../../../services/restaurants/restaurant.context";
 import RestaurantInfo from "../component/RestaurantInfoCard";
+import SearchBar from "../component/SearchBar";
 import {
+  Loading,
   RestaurantContainer,
   RestaurantListContainer,
-  SearchContainer,
 } from "./RestaurantScreen.style";
 
 const RestaurantScreen = () => {
+  const { restaurants, isLoading } = useContext(RestaurantsContext);
   return (
     <RestaurantContainer>
-      <SearchContainer>
-        <Searchbar placeholder="search now" />
-      </SearchContainer>
+      <SearchBar />
       <RestaurantListContainer>
+        {isLoading && <Loading size={50} color={"tomato"} />}
         <FlatList
-          data={[{ name: 1 }, { name: 2 }, { name: 3 }]}
-          renderItem={({ item }) => <RestaurantInfo />}
-          keyExtractor={(item) => item.name.toString()}
+          data={restaurants}
+          renderItem={({ item }) => <RestaurantInfo restaurant={item} />}
+          keyExtractor={(item, idx) => `${item.name}-${idx}`}
         />
       </RestaurantListContainer>
     </RestaurantContainer>

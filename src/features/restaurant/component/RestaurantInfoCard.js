@@ -16,15 +16,13 @@ import {
 
 const RestaurantInfo = ({ restaurant = {} }) => {
   const {
-    name = "Some Restaurant",
-    icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
-    photos = [
-      "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
-    ],
-    address = "100 some random street",
-    isOpenNow = true,
+    name,
+    icon,
+    photos,
+    address,
+    isOpenNow,
     rating = 4,
-    isClosedTemporarily = true,
+    isClosedTemporarily,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
@@ -36,8 +34,13 @@ const RestaurantInfo = ({ restaurant = {} }) => {
         <Text variant="label">{name}</Text>
         <Row>
           <Rating>
-            {ratingArray.map((r, i) => (
-              <SvgXml key={i} xml={star} width={25} height={25} />
+            {ratingArray.map((_, i) => (
+              <SvgXml
+                key={`star-${name}-${i}`}
+                xml={star}
+                width={25}
+                height={25}
+              />
             ))}
           </Rating>
           <IconContainer>
